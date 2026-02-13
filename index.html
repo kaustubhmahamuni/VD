@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Infinite Couple Gallery · love story</title>
-
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+    
     <style>
         /* ----- LIGHT THEME + NO HORIZONTAL SCROLL + RESPONSIVE HEADINGS ----- */
         :root {
@@ -17,13 +16,12 @@
             --dark-text: #1e1e2a;
             --glass: rgba(0, 0, 0, 0.02);
         }
-
+        
         html {
             scroll-behavior: smooth;
             overflow-x: hidden;
             width: 100%;
         }
-
         body {
             background: var(--light-bg);
             color: var(--dark-text);
@@ -48,10 +46,7 @@
         }
 
         /* Shared layout */
-        .section-padding {
-            padding: 180px 0;
-        }
-
+        .section-padding { padding: 180px 0; }
         .full-vh {
             min-height: 100vh;
             display: flex;
@@ -59,38 +54,33 @@
             justify-content: center;
             position: relative;
         }
-
+        
 
         /* Parallax backgrounds unchanged */
         .parallax {
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 
-        /* Enable parallax only on desktop */
-        @media (min-width: 768px) {
-            .parallax {
-                background-attachment: fixed;
-            }
-        }
+/* Enable parallax only on desktop */
+@media (min-width: 768px) {
+    .parallax {
+        background-attachment: fixed;
+    }
+}
 
-        /* Disable fixed on mobile */
-        @media (max-width: 767px) {
-            .parallax {
-                background-attachment: scroll;
-                min-height: 100vh;
-            }
-        }
+/* Disable fixed on mobile */
+@media (max-width: 767px) {
+    .parallax {
+        background-attachment: scroll;
+        min-height: 100vh;
+    }
+}
 
         /* .bg-1 { background-image: url('/Img/IMG_0768.PNG'); } */
-        .bg-2 {
-            background-image: url('Img/IMG_0805.JPG.jpg');
-        }
-
-        .bg-3 {
-            background-image: url('Img/IMG_15965.PNG');
-        }
+        .bg-2 { background-image: url('Img/IMG_0805.JPG.jpg'); }
+        .bg-3 { background-image: url('Img/IMG_15965.PNG'); }
 
         /* LIGHT OVERLAY */
         .dark-overlay {
@@ -108,7 +98,6 @@
             position: relative;
             color: #1e1e2a;
         }
-
         .parallax.bg-2::before {
             content: "";
             position: absolute;
@@ -120,7 +109,6 @@
             z-index: 1;
             pointer-events: none;
         }
-
         .parallax.bg-2 .text-center {
             position: relative;
             z-index: 2;
@@ -135,10 +123,7 @@
             max-width: 100%;
             height: auto;
         }
-
-        .float-img:hover {
-            transform: translateY(-20px) scale(1.02);
-        }
+        .float-img:hover { transform: translateY(-20px) scale(1.02); }
 
         /* Masonry */
         .masonry-layout {
@@ -147,7 +132,6 @@
             max-width: 100%;
             overflow: hidden;
         }
-
         .masonry-layout img {
             width: 100%;
             border-radius: 15px;
@@ -156,7 +140,6 @@
             transition: 0.5s;
             display: block;
         }
-
         .masonry-layout img:hover {
             filter: brightness(1.05);
             transform: rotate(1deg);
@@ -171,7 +154,6 @@
             color: inherit;
             word-break: break-word;
         }
-
         .quote-text {
             font-style: italic;
             font-weight: 300;
@@ -181,22 +163,13 @@
             padding-left: 2rem;
             max-width: 100%;
         }
-
-        .text-accent {
-            color: var(--accent);
-        }
-
-        .ls-5 {
-            letter-spacing: 5px;
-        }
-
-        .text-secondary {
-            color: #5e5e72 !important;
-        }
+        .text-accent { color: var(--accent); }
+        .ls-5 { letter-spacing: 5px; }
+        .text-secondary { color: #5e5e72 !important; }
 
         /* Storyboard images (unchanged, but now with love-story text) */
         .bg-white.text-dark img {
-            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
             max-width: 100%;
             height: auto;
         }
@@ -208,15 +181,13 @@
             background: transparent;
             transition: 0.3s;
         }
-
         .btn-outline-dark:hover {
             background: #1e1e2a;
             color: #fff;
         }
 
         /* Bootstrap container adjustments */
-        .container,
-        .container-fluid {
+        .container, .container-fluid {
             padding-left: 15px;
             padding-right: 15px;
             margin-left: auto;
@@ -224,12 +195,10 @@
             max-width: 100%;
             overflow: hidden;
         }
-
         .row {
             margin-left: 0;
             margin-right: 0;
         }
-
         [class*="col-"] {
             padding-left: 15px;
             padding-right: 15px;
@@ -241,32 +210,25 @@
                 font-size: calc(2.8rem + 2vw);
                 line-height: 1.1;
             }
-
             .quote-text {
                 font-size: 1.8rem;
                 padding-left: 1.2rem;
             }
-
             .display-3 {
                 font-size: 2.5rem !important;
             }
-
             .display-5 {
                 font-size: 2rem !important;
             }
-
             h2.display-3.fw-bold {
                 font-size: 2.5rem !important;
             }
-
             .fw-black {
                 font-size: 2.2rem !important;
             }
-
             .ls-5 {
                 letter-spacing: 3px;
             }
-
             .section-padding {
                 padding: 100px 0;
             }
@@ -276,100 +238,85 @@
             .title-giant {
                 font-size: 2.2rem;
             }
-
             .quote-text {
                 font-size: 1.5rem;
             }
         }
+	
+/* Center text already handled by your classes */
 
-        /* Center text already handled by your classes */
+/* Scroll indicator fixed at bottom center */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  animation: float 2.5s ease-in-out infinite;
+  z-index: 10;
+}
 
-        /* Scroll indicator fixed at bottom center */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            animation: float 2.5s ease-in-out infinite;
-            z-index: 10;
-        }
+/* Mouse */
+.mouse {
+  width: 35px;
+  height: 60px;
+  border: 2px solid black;
+  border-radius: 30px;
+  position: relative;
+  margin: 0 auto;
+  box-shadow: 0 0 15px rgba(255,255,255,0.4);
+}
 
-        /* Mouse */
-        .mouse {
-            width: 35px;
-            height: 60px;
-            border: 2px solid black;
-            border-radius: 30px;
-            position: relative;
-            margin: 0 auto;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-        }
+/* Wheel */
+.wheel {
+  width: 6px;
+  height: 12px;
+  background: black;
+  border-radius: 10px;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollWheel 1.6s infinite;
+}
 
-        /* Wheel */
-        .wheel {
-            width: 6px;
-            height: 12px;
-            background: black;
-            border-radius: 10px;
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: scrollWheel 1.6s infinite;
-        }
+/* Scroll text */
+.scroll-indicator span {
+  display: block;
+  margin-top: 12px;
+  font-size: 13px;
+  letter-spacing: 4px;
+  color: black;
+  animation: fadeText 2s infinite;
+}
 
-        /* Scroll text */
-        .scroll-indicator span {
-            display: block;
-            margin-top: 12px;
-            font-size: 13px;
-            letter-spacing: 4px;
-            color: black;
-            animation: fadeText 2s infinite;
-        }
+/* Wheel animation */
+@keyframes scrollWheel {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+}
 
-        /* Wheel animation */
-        @keyframes scrollWheel {
-            0% {
-                opacity: 1;
-                transform: translate(-50%, 0);
-            }
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translate(-50%, 0px); }
+  50% { transform: translate(-50%, -10px); }
+}
 
-            100% {
-                opacity: 0;
-                transform: translate(-50%, 20px);
-            }
-        }
+/* Text fade animation */
+@keyframes fadeText {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
 
-        /* Floating animation */
-        @keyframes float {
 
-            0%,
-            100% {
-                transform: translate(-50%, 0px);
-            }
-
-            50% {
-                transform: translate(-50%, -10px);
-            }
-        }
-
-        /* Text fade animation */
-        @keyframes fadeText {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.5;
-            }
-        }
     </style>
 </head>
-
 <body>
 
     <div id="progress"></div>
@@ -382,11 +329,7 @@
                 <p class="ls-5">This is for you</p>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <div class="mouse">
-                <div class="wheel"></div>
-            </div> <span>Scroll</span>
-        </div>
+<div class="scroll-indicator"> <div class="mouse"> <div class="wheel"></div> </div> <span>Scroll</span> </div>
     </section>
 
     <!-- GALLERY – now with love-story context -->
@@ -401,7 +344,7 @@
             <img src="Img/IMG_1195.PNG" data-aos="fade-up" data-aos-delay="100" alt="couple walking">
             <img src="Img/IMG_E0809.JPG" data-aos="fade-up" data-aos-delay="100" alt="couple on bridge">
             <img src="Img/IMG_0812.JPG.jpeg" data-aos="fade-up" data-aos-delay="100" alt="couple on bridge">
-
+            
 
         </div>
     </section>
@@ -410,8 +353,7 @@
     <section class="section-padding container" data-aos="fade-right">
         <div class="row">
             <div class="col-lg-8">
-                <p class="quote-text">"Love is not about how many days, months, or years you’ve been together. It’s
-                    about how much you love each other every day."</p>
+                <p class="quote-text">"Love is not about how many days, months, or years you’ve been together. It’s about how much you love each other every day."</p>
                 <small class="text-accent">— Kaustubh Mahamuni</small>
             </div>
         </div>
@@ -461,15 +403,15 @@
     </section> -->
 
     <section class="section-padding container">
-
+        
         <div class="masonry-layout">
-            <img src="Img/IMG_1237.PNG" data-aos="fade-up" data-aos-delay="100" alt="couple walking">
-            <img src="Img/IMG_1596.PNG" data-aos="fade-up" alt="couple in field">
-            <img src="Img/IMG_11733.PNG" data-aos="fade-up" data-aos-delay="200" alt="couple kissing">
-            <img src="Img/IMG_1220.JPG" data-aos="fade-up" data-aos-delay="200" alt="couple laughing">
-            <img src="Img/IMG_1292.JPG.jpeg" data-aos="fade-up" alt="romantic embrace">
-            <img src="Img/IMG_E07811.JPG" data-aos="fade-up" data-aos-delay="100" alt="couple on bridge">
+            <img src="Img/IMG_1186.PNG" data-aos="fade-up" alt="couple in field">
+            <img src="Img/IMG_1222.JPG" data-aos="fade-up" data-aos-delay="100" alt="couple kissing">
+            <img src="Img/IMG_1195.PNG" data-aos="fade-up" data-aos-delay="100" alt="couple walking">
+            <img src="Img/IMG_E0809.JPG" data-aos="fade-up" data-aos-delay="100" alt="couple on bridge">
+            <img src="Img/IMG_0805.JPG.jpg" data-aos="fade-up" data-aos-delay="100" alt="couple on bridge">
         </div>
+
     </section>
 
     <!-- FINAL PARALLAX: ENDLESS (future together) -->
@@ -483,16 +425,16 @@
             </div>
         </div>
     </section>
-    <section class="section-padding container" data-aos="fade-right">
+<section class="section-padding container" data-aos="fade-right">
         <div class="row">
             <div class="col-lg-8">
-                <p class="quote-text">HAPPY VALENTINE DAY DEAR AISHWARYA ❤️ <br>I Love you So So much Bayko...❤️<br></p>
+                <p class="quote-text">HAPPY VALENTINE DAY DEAR AISHU❤️ <br>I Love you So So much...❤️<br></p>
                 <small class="text-accent">— Kaustubh Mahamuni</small>
             </div>
-
+   
 
         </div>
-        <a href="#" class="btn btn-outline-light rounded-pill px-5 mt-4 py-3">BACK TO TOP</a>
+ <a href="#" class="btn btn-outline-light rounded-pill px-5 mt-4 py-3" >BACK TO TOP</a> 
     </section>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -508,5 +450,4 @@
         };
     </script>
 </body>
-
 </html>
