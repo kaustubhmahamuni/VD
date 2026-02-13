@@ -55,8 +55,29 @@
             position: relative;
         }
         
+
         /* Parallax backgrounds unchanged */
-        .parallax { background-attachment: fixed; background-position: center; background-size: cover; }
+        .parallax {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Enable parallax only on desktop */
+@media (min-width: 768px) {
+    .parallax {
+        background-attachment: fixed;
+    }
+}
+
+/* Disable fixed on mobile */
+@media (max-width: 767px) {
+    .parallax {
+        background-attachment: scroll;
+        min-height: 100vh;
+    }
+}
+
         /* .bg-1 { background-image: url('/Img/IMG_0768.PNG'); } */
         .bg-2 { background-image: url('Img/IMG_0805.JPG.jpg'); }
         .bg-3 { background-image: url('Img/IMG_15965.PNG'); }
@@ -324,7 +345,9 @@
         <div >
             <div class="ri p-4 " data-aos="fade-up">
                 <h2 style="color: #fff;">HAPPY VALENTINE DAY DEAR AISHU❤️</h2>
-                <p style="color: #fff;" class="ls-5">I Love you So So much...❤️</p>
+                <p style="color: #fff;" class
+
+="ls-5">I Love you So So much...❤️</p>
                 <p style="color: #fff;" class="ls-5">THE JOURNEY CONTINUES...</p>
                 <!-- <a href="#" class="btn btn-outline-light rounded-pill px-5 mt-4 py-3" style="color: #fff;">BACK TO TOP</a> -->
             </div>
