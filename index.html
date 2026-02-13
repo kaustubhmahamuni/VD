@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Infinite Couple Gallery · love story</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* ----- LIGHT THEME + NO HORIZONTAL SCROLL + RESPONSIVE HEADINGS ----- */
+        :root {
+            --accent: #ff4d6d;
+            --light-bg: #ffffff;
+            --dark-text: #1e1e2a;
+            --glass: rgba(0, 0, 0, 0.02);
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
+        }
+        body {
+            background: var(--light-bg);
+            color: var(--dark-text);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Progress tracker */
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent);
+            z-index: 10000;
+            width: 0%;
+            transition: width 0.2s;
+        }
+
+        /* Shared layout */
+        .section-padding { padding: 180px 0; }
+        .full-vh {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        /* Parallax backgrounds unchanged */
+        .parallax { background-attachment: fixed; background-position: center; background-size: cover; }
+        /* .bg-1 { background-image: url('/Img/IMG_0768.PNG'); } */
+        .bg-2 { background-image: url('Img/IMG_0805.JPG.jpg'); }
+        .bg-3 { background-image: url('Img/IMG_15965.PNG'); }
+
+        /* LIGHT OVERLAY */
+        .dark-overlay {
+            background: rgba(255, 255, 255, 0.7) !important;
+            color: #1e1e2a !important;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* bg-2 veil */
+        .parallax.bg-2 {
+            position: relative;
+            color: #1e1e2a;
+        }
+        .parallax.bg-2::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* background: rgba(255, 255, 255, 0.5); */
+            z-index: 1;
+            pointer-events: none;
+        }
+        .parallax.bg-2 .text-center {
+            position: relative;
+            z-index: 2;
+            /* text-shadow: 0 2px 4px rgba(255,255,255,0.8); */
+        }
+
+        /* Floating images */
+        .float-img {
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+            transition: 1s ease;
+            max-width: 100%;
+            height: auto;
+        }
+        .float-img:hover { transform: translateY(-20px) scale(1.02); }
+
+        /* Masonry */
+        .masonry-layout {
+            columns: 3 350px;
+            column-gap: 2rem;
+            max-width: 100%;
+            overflow: hidden;
+        }
+        .masonry-layout img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            filter: brightness(0.95);
+            transition: 0.5s;
+            display: block;
+        }
+        .masonry-layout img:hover {
+            filter: brightness(1.05);
+            transform: rotate(1deg);
+        }
+
+        /* Typography */
+        .title-giant {
+            font-size: calc(3rem + 6vw);
+            font-weight: 900;
+            line-height: 0.9;
+            text-transform: uppercase;
+            color: inherit;
+            word-break: break-word;
+        }
+        .quote-text {
+            font-style: italic;
+            font-weight: 300;
+            font-size: 2.5rem;
+            color: #4a4a5a;
+            border-left: 4px solid var(--accent);
+            padding-left: 2rem;
+            max-width: 100%;
+        }
+        .text-accent { color: var(--accent); }
+        .ls-5 { letter-spacing: 5px; }
+        .text-secondary { color: #5e5e72 !important; }
+
+        /* Storyboard images (unchanged, but now with love-story text) */
+        .bg-white.text-dark img {
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Button */
+        .btn-outline-dark {
+            border: 2px solid #1e1e2a;
+            color: #1e1e2a;
+            background: transparent;
+            transition: 0.3s;
+        }
+        .btn-outline-dark:hover {
+            background: #1e1e2a;
+            color: #fff;
+        }
+
+        /* Bootstrap container adjustments */
+        .container, .container-fluid {
+            padding-left: 15px;
+            padding-right: 15px;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+            overflow: hidden;
+        }
+        .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+        [class*="col-"] {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        /* Responsive fixes for small screens */
+        @media (max-width: 576px) {
+            .title-giant {
+                font-size: calc(2.8rem + 2vw);
+                line-height: 1.1;
+            }
+            .quote-text {
+                font-size: 1.8rem;
+                padding-left: 1.2rem;
+            }
+            .display-3 {
+                font-size: 2.5rem !important;
+            }
+            .display-5 {
+                font-size: 2rem !important;
+            }
+            h2.display-3.fw-bold {
+                font-size: 2.5rem !important;
+            }
+            .fw-black {
+                font-size: 2.2rem !important;
+            }
+            .ls-5 {
+                letter-spacing: 3px;
+            }
+            .section-padding {
+                padding: 100px 0;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .title-giant {
+                font-size: 2.2rem;
+            }
+            .quote-text {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="progress"></div>
+
+    <!-- PHASE 1: THE SPARK (love story beginning) -->
+    <section class="full-vh parallax bg-1">
+        <div class="dark-overlay">
+            <div class="text-center" data-aos="zoom-out" data-aos-duration="2500">
+                <h1 class="title-giant">AISHWARYA</h1>
+                <p class="ls-5">This is for you</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY – now with love-story context -->
+    <section class="section-padding container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <!-- <h2 class="display-3 fw-bold">OUR STORY IN FRAMES</h2> -->
+            <p class="text-secondary">A collection of moments that became forever.</p>
+        </div>
+        <div class="masonry-layout">
+            <img src="Img/IMG_1186.PNG" data-aos="fade-up" alt="couple in field">
+            <img src="Img/IMG_1222.JPG" data-aos="fade-up" data-aos-delay="100" alt="couple kissing">
+            <img src="Img/IMG_1195.PNG" data-aos="fade-up" data-aos-delay="100" alt="couple walking">
+            <img src="Img/IMG_E0809.JPG" data-aos="fade-up" data-aos-delay="100" alt="couple on bridge">
+            <img src="Img/IMG_0812.JPG.jpeg" data-aos="fade-up" data-aos-delay="100" alt="couple on bridge">
+            
+
+        </div>
+    </section>
+
+    <!-- QUOTE (kept, still romantic) -->
+    <section class="section-padding container" data-aos="fade-right">
+        <div class="row">
+            <div class="col-lg-8">
+                <p class="quote-text">"The best thing to hold onto in life is each other."</p>
+                <small class="text-accent">— Kaustubh Mahamuni</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- SIDE BY SIDE – now telling the love story chapters -->
+    <section class="section-padding container">
+        <div class="row align-items-center mb-5 pb-5">
+            <div class="col-md-7" data-aos="fade-right">
+                <img src="Img/IMG_12377.PNG" class="img-fluid float-img" alt="first encounter">
+            </div>
+            <div class="col-md-5 p-5" data-aos="fade-left">
+                <h3 class="display-5 fw-bold">The First Encounter</h3>
+                <p class="text-secondary">Two strangers, one crowded café — and a glance that lasted a lifetime.</p>
+            </div>
+        </div>
+        <div class="row align-items-center flex-row-reverse">
+            <div class="col-md-7" data-aos="fade-left">
+                <img src="Img/IMG_1203.JPG.jpeg" class="img-fluid float-img" alt="adventure together">
+            </div>
+            <div class="col-md-5 p-5" data-aos="fade-right">
+                <h3 class="display-5 fw-bold">The Adventure Begins</h3>
+                <p class="text-secondary">From city streets to mountain tops, every step together felt like home.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHASE 2: THE FLOW (connection deepens) -->
+    <section class="full-vh parallax bg-2">
+        <div class="text-center" data-aos="zoom-in">
+            <!-- <h2 class="title-giant">CONNECTION</h2> -->
+            <!-- <p class="ls-5">PHASE 02 : THE FLOW</p> -->
+        </div>
+    </section>
+
+    <!-- STORYBOARD – renamed and now part of the love story -->
+    <!-- <section class="section-padding bg-white text-dark">
+        <div class="container-fluid">
+            <h2 class="text-center mb-5 fw-black" data-aos="fade-down">MOMENTS IN TIME</h2>
+            <div class="row g-2">
+                <div class="col-md-3" data-aos="flip-left"><img src="https://picsum.photos/id/64/600/800" class="img-fluid shadow" alt="memory 1"></div>
+                <div class="col-md-3" data-aos="flip-left" data-aos-delay="200"><img src="https://picsum.photos/id/65/600/800" class="img-fluid shadow" alt="memory 2"></div>
+                <div class="col-md-3" data-aos="flip-left" data-aos-delay="400"><img src="https://picsum.photos/id/66/600/800" class="img-fluid shadow" alt="memory 3"></div>
+                <div class="col-md-3" data-aos="flip-left" data-aos-delay="600"><img src="https://picsum.photos/id/67/600/800" class="img-fluid shadow" alt="memory 4"></div>
+            </div>
+        </div>
+    </section> -->
+
+    <section class="section-padding container">
+        
+        <div class="masonry-layout">
+            <img src="Img/IMG_1237.PNG" data-aos="fade-up" data-aos-delay="100" alt="couple walking">
+            <img src="Img/IMG_1596.PNG" data-aos="fade-up" alt="couple in field">
+            <img src="Img/IMG_11733.PNG" data-aos="fade-up" data-aos-delay="200" alt="couple kissing">
+            <img src="Img/IMG_1220.JPG" data-aos="fade-up" data-aos-delay="200" alt="couple laughing">
+            <img src="Img/IMG_1292.JPG.jpeg" data-aos="fade-up" alt="romantic embrace">
+            <img src="Img/IMG_E07811.JPG" data-aos="fade-up" data-aos-delay="100" alt="couple on bridge">
+        </div>
+    </section>
+
+    <!-- FINAL PARALLAX: ENDLESS (future together) -->
+    <section class="full-vh parallax bg-3">
+        <div >
+            <div class="ri p-4" data-aos="fade-up">
+                <h2 style="color: #fff;">HAPPY VALENTINE DAY DEAR AISHU❤️</h2>
+                <p style="color: #fff;" class="ls-5">I Love you So So much...❤️</p>
+                <p style="color: #fff;" class="ls-5">THE JOURNEY CONTINUES...</p>
+                <!-- <a href="#" class="btn btn-outline-light rounded-pill px-5 mt-4 py-3" style="color: #fff;">BACK TO TOP</a> -->
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        AOS.init({ duration: 1200, once: false, mirror: true });
+
+        window.onscroll = () => {
+            let winScroll = document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
